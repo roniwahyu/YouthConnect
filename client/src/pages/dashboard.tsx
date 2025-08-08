@@ -233,6 +233,24 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Admin Panel */}
+          <Card className="hover:shadow-lg transition-shadow group cursor-pointer">
+            <CardContent className="p-6">
+              <div 
+                className="flex items-center space-x-4"
+                onClick={() => setLocation("/admin")}
+              >
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-lg group-hover:scale-105 transition-transform">
+                  <i className="fas fa-cog text-blue-500 text-xl"></i>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-900">Admin Panel</h3>
+                  <p className="text-gray-600 text-sm">Database & system settings</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Crisis Support */}

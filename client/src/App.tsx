@@ -15,6 +15,7 @@ import Relaxation from "@/pages/relaxation";
 import Achievements from "@/pages/achievements";
 import Counselors from "@/pages/counselors";
 import Profile from "@/pages/profile";
+import Admin from "@/pages/admin";
 
 function Router() {
   return (
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/achievements" component={Achievements} />
       <Route path="/counselors" component={Counselors} />
       <Route path="/profile" component={Profile} />
+      <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   );

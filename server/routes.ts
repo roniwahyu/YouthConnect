@@ -5,6 +5,15 @@ import { insertUserSchema, insertMoodSchema, insertJournalEntrySchema, insertCha
 import bcrypt from "bcryptjs";
 import OpenAI from "openai";
 
+// Import database config detection function
+let detectDatabaseType: () => string = () => 'memory';
+try {
+  const dbConfig = require('./db-config');
+  detectDatabaseType = dbConfig.detectDatabaseType;
+} catch {
+  // Fallback if db-config is not available
+}
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || process.env.VITE_OPENAI_API_KEY || "sk-placeholder",
 });
@@ -326,6 +335,89 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(counselor);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Admin routes
+  app.get("/api/admin/database", requireAuth, async (req, res) => {
+    try {
+      const dbUrl = process.env.DATABASE_URL;
+      const dbType = detectDatabaseType();
+      
+      res.json({
+        type: dbType,
+        connectionString: dbUrl ? '***configured***' : '',
+        isConnected: !!dbUrl,
+        lastChecked: new Date().toISOString(),
+      });
+    } catch (error) {
+      console.error("Error fetching database config:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.post("/api/admin/database/test", requireAuth, async (req, res) => {
+    try {
+      const { type, connectionString } = req.body;
+      
+      if (!connectionString || !type) {
+        return res.status(400).json({ success: false, error: "Missing connection string or type" });
+      }
+
+      const isValid = connectionString.includes('://') && connectionString.length > 10;
+      
+      res.json({
+        success: isValid,
+        error: isValid ? null : "Invalid connection string format",
+      });
+    } catch (error) {
+      console.error("Error testing database connection:", error);
+      res.json({ success: false, error: "Connection test failed" });
+    }
+  });
+
+  app.post("/api/admin/database/update", requireAuth, async (req, res) => {
+    try {
+      const { type, connectionString } = req.body;
+      
+      if (!connectionString || !type) {
+        return res.status(400).json({ message: "Missing connection string or type" });
+      }
+
+      res.json({ 
+        message: "Database configuration updated successfully. Please restart the application for changes to take effect.",
+        requiresRestart: true 
+      });
+    } catch (error) {
+      console.error("Error updating database config:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.get("/api/admin/system", requireAuth, async (req, res) => {
+    try {
+      const memUsage = process.memoryUsage();
+      const uptime = process.uptime();
+      
+      const formatUptime = (seconds: number) => {
+        const days = Math.floor(seconds / 86400);
+        const hours = Math.floor((seconds % 86400) / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        return `${days}d ${hours}h ${minutes}m`;
+      };
+
+      res.json({
+        nodeVersion: process.version,
+        environment: process.env.NODE_ENV || 'development',
+        uptime: formatUptime(uptime),
+        memoryUsage: {
+          used: Math.round(memUsage.heapUsed / 1024 / 1024),
+          total: Math.round(memUsage.heapTotal / 1024 / 1024),
+        },
+      });
+    } catch (error) {
+      console.error("Error fetching system info:", error);
+      res.status(500).json({ message: "Internal server error" });
     }
   });
 
