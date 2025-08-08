@@ -261,4 +261,8 @@ export class MemStorage implements IStorage {
   }
 }
 
+// Export memory storage by default, can be switched to database storage when needed
 export const storage = new MemStorage();
+
+// For database storage, uncomment the next line and comment the above
+// export { storage } from './storage-db';

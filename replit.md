@@ -28,7 +28,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Database Architecture
 - **ORM**: Drizzle ORM with TypeScript-first schema definitions
-- **Database**: PostgreSQL with Neon serverless hosting
+- **Database**: Flexible multi-database support with automatic detection
+- **Supported Databases**:
+  - Localhost PostgreSQL
+  - Localhost MySQL  
+  - NeonDB (PostgreSQL cloud)
+  - Supabase (PostgreSQL cloud)
+  - Aiven MySQL (cloud)
 - **Schema Design**: 
   - Users table with trial and subscription tracking
   - Moods table for daily mood tracking entries
@@ -37,6 +43,7 @@ Preferred communication style: Simple, everyday language.
   - SRQ-29 assessments with scoring and interpretation
   - Achievements system for user engagement
   - Counselors table for professional counselor profiles
+- **Storage Layer**: Abstracted storage interface with both in-memory and database implementations
 
 ### Authentication & Authorization
 - **Strategy**: Session-based authentication using express-session
@@ -52,9 +59,10 @@ Preferred communication style: Simple, everyday language.
 ## External Dependencies
 
 ### Core Infrastructure
-- **Database**: Neon PostgreSQL serverless database
+- **Database**: Multi-provider support (PostgreSQL/MySQL, local/cloud)
 - **Session Store**: PostgreSQL-backed session management
 - **Build System**: Vite with TypeScript and React plugins
+- **Database Configuration**: Automatic database type detection and connection management
 
 ### AI Services
 - **OpenAI API**: GPT models for AI counseling conversations
