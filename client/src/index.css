@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(210 25% 7.8431%);
+  --card: hsl(180 6.6667% 97.0588%);
+  --card-foreground: hsl(210 25% 7.8431%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(210 25% 7.8431%);
+  --primary: hsl(14.8 88.5% 53.1%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(210 25% 7.8431%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(240 1.9608% 90%);
+  --muted-foreground: hsl(210 25% 7.8431%);
+  --accent: hsl(170 51.4% 92.7%);
+  --accent-foreground: hsl(14.8 88.5% 53.1%);
+  --destructive: hsl(356.3033 90.5579% 54.3137%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(201.4286 30.4348% 90.9804%);
+  --input: hsl(200 23.0769% 97.4510%);
+  --ring: hsl(14.8 88.5% 53.1%);
+  --chart-1: hsl(14.8 88.5% 53.1%);
+  --chart-2: hsl(159.7826 100% 36.0784%);
+  --chart-3: hsl(42.0290 92.8251% 56.2745%);
+  --chart-4: hsl(147.1429 78.5047% 41.9608%);
+  --chart-5: hsl(341.4894 75.2000% 50.9804%);
+  --sidebar: hsl(180 6.6667% 97.0588%);
+  --sidebar-foreground: hsl(210 25% 7.8431%);
+  --sidebar-primary: hsl(14.8 88.5% 53.1%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(170 51.4% 92.7%);
+  --sidebar-accent-foreground: hsl(14.8 88.5% 53.1%);
+  --sidebar-border: hsl(205.0000 25.0000% 90.5882%);
+  --sidebar-ring: hsl(14.8 88.5% 53.1%);
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 1.3rem;
+  
+  /* CURHATIN Custom Colors */
+  --teal-50: hsl(170 100% 98%);
+  --teal-100: hsl(170 90% 95%);
+  --teal-500: hsl(170 78% 42%);
+  --teal-600: hsl(170 85% 35%);
+  --teal-700: hsl(170 90% 28%);
+  --pink-50: hsl(327 73% 97%);
+  --pink-100: hsl(327 73% 95%);
+  --pink-400: hsl(327 73% 60%);
+  --pink-500: hsl(327 73% 50%);
+  --pink-600: hsl(327 85% 45%);
+  --purple-50: hsl(270 100% 98%);
+  --purple-100: hsl(270 100% 95%);
+  --purple-500: hsl(270 100% 60%);
+  --orange-50: hsl(25 100% 97%);
+  --orange-100: hsl(25 100% 94%);
+  --orange-500: hsl(25 95% 53%);
+  --blue-50: hsl(220 100% 97%);
+  --blue-100: hsl(220 100% 94%);
+  --blue-500: hsl(220 100% 60%);
+  --green-50: hsl(140 100% 97%);
+  --green-100: hsl(140 100% 94%);
+  --green-500: hsl(140 100% 40%);
+  --yellow-50: hsl(48 100% 96%);
+  --yellow-100: hsl(48 100% 93%);
+  --yellow-500: hsl(48 96% 53%);
+}
+
+.dark {
+  --background: hsl(0 0% 0%);
+  --foreground: hsl(200 6.6667% 91.1765%);
+  --card: hsl(228 9.8039% 10%);
+  --card-foreground: hsl(0 0% 85.0980%);
+  --popover: hsl(0 0% 0%);
+  --popover-foreground: hsl(200 6.6667% 91.1765%);
+  --primary: hsl(14.8 88.5% 53.1%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(195.0000 15.3846% 94.9020%);
+  --secondary-foreground: hsl(210 25% 7.8431%);
+  --muted: hsl(0 0% 9.4118%);
+  --muted-foreground: hsl(210 3.3898% 46.2745%);
+  --accent: hsl(170 70% 8%);
+  --accent-foreground: hsl(14.8 88.5% 53.1%);
+  --destructive: hsl(356.3033 90.5579% 54.3137%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 5.2632% 14.9020%);
+  --input: hsl(207.6923 27.6596% 18.4314%);
+  --ring: hsl(14.8 88.5% 53.1%);
+  --sidebar: hsl(228 9.8039% 10%);
+  --sidebar-foreground: hsl(0 0% 85.0980%);
+  --sidebar-primary: hsl(14.8 88.5% 53.1%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(170 70% 8%);
+  --sidebar-accent-foreground: hsl(14.8 88.5% 53.1%);
+  --sidebar-border: hsl(205.7143 15.7895% 26.0784%);
+  --sidebar-ring: hsl(14.8 88.5% 53.1%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer utilities {
+  .gradient-teal-pink {
+    background: linear-gradient(135deg, var(--teal-500), var(--pink-500));
+  }
+  
+  .gradient-teal-pink-50 {
+    background: linear-gradient(135deg, var(--teal-50), var(--pink-50));
+  }
+  
+  .text-gradient-teal-pink {
+    background: linear-gradient(135deg, var(--teal-600), var(--pink-500));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
